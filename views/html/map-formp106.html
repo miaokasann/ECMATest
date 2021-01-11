@@ -19,6 +19,13 @@
       let map = new Map()
       let inputs = document.querySelectorAll('[message]')
       console.log(inputs)
+      inputs.forEach((item) => {
+        map.set(item, {
+          error: item.getAttribute('message'),
+          status: item.checked,
+        })
+      })
+      console.log(map)
       return false
     }
   </script>
