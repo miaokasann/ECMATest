@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>map select课程</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        padding: 20px;
+        width: 100vw;
+        display: flex;
+        box-sizing: border-box;
+      }
+      div {
+        border: solid 2px #ddd;
+        padding: 10px;
+        flex: 1;
+      }
+      div:last-of-type {
+        margin-left: -2px;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+        width: 200px;
+        flex-direction: column;
+      }
+      li {
+        height: 30px;
+        border: solid 2px #e67e22;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 10px;
+        color: #333;
+        transition: 1s;
+      }
+      a {
+        border-radius: 3px;
+        width: 20px;
+        height: 20px;
+        text-decoration: none;
+        text-align: center;
+        background: #16a085;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 5px;
+      }
+      .remove {
+        border: solid 2px #eee;
+        opacity: 0.8;
+        color: #eee;
+      }
+      .remove a {
+        background: #eee;
+      }
+      p {
+        margin-top: 20px;
+      }
+      p span {
+        display: inline-block;
+        background: #16a085;
+        padding: 5px;
+        color: white;
+        margin-right: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li><span>php</span> <a href="javascript:;">+</a></li>
+        <li><span>js</span> <a href="javascript:;">+</a></li>
+        <li><span>向军讲编程</span><a href="javascript:;">+</a></li>
+      </ul>
+    </div>
+    <div>
+      <strong id="count">共选了2门课</strong>
+      <p id="lists"></p>
+    </div>
+  </body>
+  <script>
+    class Lesson {
+      constructor() {
+        this.lists = document.querySelectorAll('ul>li')
+        this.countElem = document.getElementById('#count')
+        this.listElem = document.getElementById('#lists')
+        this.map = new WeakMap()
+      }
+      run() {
+        this.lists.forEach((li) => {
+          li.querySelector('a').addEventListener('click', (event) => {
+            const a = event.target
+            console.log(a)
+            const state = li.getAttribute('select')
+            if (state) {
+              li.removeAttribute('select')
+              this.map.delete(li)
+              a.innerHtml = '+'
+              a.style.backgroundColor = 'green'
+            } else {
+              this.map.set(li)
+              li.setAttribute('select', true)
+              a.innerHtml = '-'
+              a.style.backgroundColor = 'red'
+            }
+            console.log(this.map)
+          })
+        })
+      }
+    }
+
+    new Lesson().run()
+  </script>
+</html>

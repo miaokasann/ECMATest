@@ -25,8 +25,11 @@
           status: item.checked,
         })
       })
-      console.log(map)
-      return false
+      console.log([...map])
+      return [...map].every(([key, value]) => {
+        value.status || alert(value.error)
+        return value.status
+      })
     }
   </script>
 </html>
