@@ -114,18 +114,35 @@
 // 	)
 
 //weakSet
+// let hd = {
+//   name: 'wmg',
+//   age: 27,
+// }
+// let edu = hd
+// let nodes = new WeakSet()
+// nodes.add(hd)
 
-let hd = {
-  name: 'wmg',
-  age: 27,
-}
+// hd = null
+// edu = null
+// console.log(nodes)
 
-let edu = hd
+/*
+  map
+*/
 
-let nodes = new WeakSet()
-nodes.add(hd)
+// let map = new Map()
+// // map.set('name', 'wangmiaoge')
+// // map.set(function () {}, 'miaokasann')
+// // map.set({}, 'wmg')
+// // console.log(map)
 
-hd = null
-edu = null
+// let obj = {
+//   name: '王妙歌',
+// }
+// map.set(obj, 'miaokasann.com')
+// console.log(map.get(obj))
 
-console.log(nodes)
+// //遍历
+// for (const [key, value] of map.entries()) {
+//   console.log(key, value)
+// }

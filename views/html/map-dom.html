@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>map DOM</title>
+  </head>
+  <body>
+    <div name="王妙歌">miaokasann</div>
+    <div name="年龄">26</div>
+  </body>
+  <script>
+    let map = new Map()
+    document.querySelectorAll('div').forEach((item) => {
+      map.set(item, {
+        content: item.getAttribute('name'),
+      })
+    })
+    console.log(map)
+    map.forEach((value, key, map) => {
+      key.addEventListener('click', () => {
+        alert(value.content)
+      })
+    })
+  </script>
+</html>
