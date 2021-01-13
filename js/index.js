@@ -554,25 +554,198 @@
 // console.log(star(8))
 
 //递归附加参数使用技巧
-let Lesson = [
-  {
-    title: '咖啡',
-    price: 5,
-  },
-  {
-    title: '护手霜',
-    price: 20,
-  },
-  {
-    title: '水杯',
-    price: 50,
-  },
-]
-function change(lessons, num = 100, i = 0) {
-  if (i == lessons.length) {
-    return lessons
-  }
-  lessons[i].price += num
-  return change(lessons, num, ++i)
+// let Lesson = [
+//   {
+//     title: '咖啡',
+//     price: 5,
+//   },
+//   {
+//     title: '护手霜',
+//     price: 20,
+//   },
+//   {
+//     title: '水杯',
+//     price: 50,
+//   },
+// ]
+// function change(lessons, num = 100, i = 0) {
+//   if (i == lessons.length) {
+//     return lessons
+//   }
+//   lessons[i].price += num
+//   return change(lessons, num, ++i)
+// }
+// console.table(change(Lesson))
+
+// function show(title) {
+//   alert(`${title + this.name}`)
+// }
+// let lisi = {
+//   name: '李四',
+// }
+// let wangwu = {
+//   name: '王五',
+// }
+// show.call(lisi, '后盾人')
+// show.apply(wangwu, ['HDCMS'])
+
+// let arr = [1, 3, 2, 8]
+// console.log(Math.max(arr)) //NaN
+// console.log(Math.max.apply(null, arr)) //8
+// console.log(Math.max(...arr)) //8
+
+/*
+  构造函数属性继承
+*/
+// function Request() {
+//   this.get = function (params = {}) {
+//     let option = Object.keys(params)
+//       .map((i) => i + '=' + params[i])
+//       .join('&')
+//     return `${this.url}?${option}`
+//   }
+// }
+// //文章的构造函数
+// function Article() {
+//   this.url = 'wmg/article'
+//   Request.call(this)
+// }
+// let hd = new Article()
+// console.log(
+//   hd.get({
+//     id: 1,
+//     title: 'aaa',
+//   })
+// )
+
+/*
+  bind
+  不会立即执行
+  会复制新的函数
+*/
+// let a = function hd(a, b) {
+//   return this.f + a + b
+// }
+// let newFunc = a.bind({ f: 1 }, 2)
+// //bind的时候可以携带参数
+// console.log(newFunc(3, 4))
+// console.log(newFunc == a)
+
+/*
+  闭包
+*/
+// for (let i = 0; i <= 3; i++) {
+//   setTimeout(function () {
+//     console.log(i)
+//   }, 1000)
+// }
+
+// let arr = [3, 2, 4, 1, 5, 6]
+// function between(a, b) {
+//   //filter中调用between方法 把a和b传进来，然后return作为回调函数执行filter方法的循环
+//   return function (v) {
+//     return v >= a && v <= b
+//   }
+// }
+// console.log(arr.filter(between(3, 5)))
+
+// console.log(
+//   arr.sort((a, b) => {
+//     return a > b ? 1 : -1
+//   })
+// )
+
+/*this历史遗留问题*/
+// let hd = {
+//   user: '后盾人',
+//   get: function () {
+//     console.log(this)
+//     return function () {
+//       return this.user
+//     }
+//   },
+// }
+// console.log(hd.get()())
+
+/*
+ 展开语法参数合并
+*/
+// function upload(params = {}) {
+//   let config = {
+//     size: 100,
+//     type: '*.png,*jpeg',
+//   }
+//   config = { ...config, ...params }
+//   console.log(config)
+// }
+// upload({ size: 99 })
+
+// let user = { name: '王妙歌', age: 18 }
+// let { name, age } = user
+// console.log(name, age)
+
+//解构赋值简写
+// let name = 'miaokasann',
+//   url = 'miaokasann.com'
+// let opt = { name, url }
+// console.log(opt)
+
+//多层对象解构
+// let wmg = {
+//   name: 'miaokasann',
+//   lesson: {
+//     title: 'aaa',
+//   },
+// }
+// let {
+//   lesson: { title },
+// } = wmg
+// console.log(title)
+
+//解构赋值 默认值
+
+/*
+  计算属性 assign
+*/
+// const lessons = [
+//   {
+//     title: '媒体查询响应式布局',
+//     category: 'css',
+//   },
+//   {
+//     title: 'FLEX 弹性盒模型',
+//     category: 'css',
+//   },
+//   {
+//     title: 'MYSQL多表查询随意操作',
+//     category: 'mysql',
+//   },
+// ]
+// let newObj = lessons.reduce((obj, cur, index) => {
+//   obj[`${cur['category']}-${index + 1}`] = cur
+//   return obj
+// }, {})
+// console.log(JSON.stringify(newObj, null, 2))
+
+// function upload(params) {
+//   let options = {
+//     size: 99,
+//   }
+//   options = Object.assign(options, params)
+//   console.log(JSON.stringify(options, null, 2))
+// }
+
+// upload({ name: 'aaa' })
+
+/*
+  遍历操作与DOM配置
+*/
+let lessons = {
+  name: 'aaa',
+  year: '2021',
 }
-console.table(change(Lesson))
+console.log(JSON.stringify(Object.entries(lessons), null, 2))
+
+for (const key in lessons) {
+  console.log(lessons[key])
+}

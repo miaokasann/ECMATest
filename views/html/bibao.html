@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>闭包</title>
+  </head>
+  <body>
+    <button message="后盾人">button</button>
+    <button message="hdcms">button</button>
+  </body>
+  <script>
+    var btns = document.querySelectorAll('button')
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].onclick = (function (i) {
+        return function () {
+          alert(`点击了第${i + 1}个按钮`)
+        }
+      })(i)
+    }
+  </script>
+</html>

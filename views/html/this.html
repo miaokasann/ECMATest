@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button message="后盾人">button</button>
+    <button message="hdcms">button</button>
+  </body>
+  <script>
+    function show() {
+      console.log(this)
+      alert(this.getAttribute('message'))
+    }
+    let bts = document.getElementsByTagName('button')
+    for (let i = 0; i < bts.length; i++) {
+      bts[i].addEventListener('click', function (event) {
+        // console.log(this)
+        // console.log(event.target)
+        show.call(bts[i])
+        // console.log(this.getAttribute('message'))
+      })
+    }
+  </script>
+</html>

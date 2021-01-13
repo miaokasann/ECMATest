@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pannel show hide</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      dl {
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      dt {
+        background: #e67e22;
+        border-bottom: solid 2px #333;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      dd {
+        height: 200px;
+        background: #bdc3c7;
+        font-size: 5em;
+        text-align: center;
+        line-height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <dl>
+      <dt>后盾人</dt>
+      <dd>1</dd>
+      <dt>hdcms</dt>
+      <dd hidden="hidden">2</dd>
+    </dl>
+  </body>
+  <script>
+    //控制面板的显示和隐藏
+    function pannel(i) {
+      let dds = document.querySelectorAll('dd')
+      //把所有的都隐藏
+      dds.forEach((item) => {
+        item.setAttribute('hidden', 'hidden')
+      })
+      dds[i].removeAttribute('hidden')
+    }
+    let dts = document.querySelectorAll('dt')
+    dts.forEach((item, index) => {
+      console.log(this)
+      item.addEventListener('click', () => {
+        console.log(this)
+        //这里pannel没用到this，所以传与不传都无所谓
+        pannel.call(null, index)
+      })
+    })
+  </script>
+</html>
