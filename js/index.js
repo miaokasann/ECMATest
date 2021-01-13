@@ -740,12 +740,69 @@
 /*
   遍历操作与DOM配置
 */
-let lessons = {
-  name: 'aaa',
-  year: '2021',
-}
-console.log(JSON.stringify(Object.entries(lessons), null, 2))
+// let lessons = {
+//   name: 'aaa',
+//   year: '2021',
+// }
+// console.log(JSON.stringify(Object.entries(lessons), null, 2))
 
-for (const key in lessons) {
-  console.log(lessons[key])
+// for (const key in lessons) {
+//   console.log(lessons[key])
+// }
+
+/*
+    递归实现深拷贝
+*/
+// function copy(obj) {
+//   let res = obj instanceof Array ? [] : {}
+//   for (const [k, v] of Object.entries(obj)) {
+//     res[k] = v instanceof Object ? copy(v) : v
+//   }
+//   return res
+// }
+// let hd = {
+//   name: 'wmg',
+//   like: {
+//     a: 'bb',
+//   },
+//   arr: [1, 2],
+// }
+// let miao = copy(hd)
+// console.log(miao)
+
+function hd(name) {}
+console.log(hd.constructor)
+
+//抽象
+// function User(name, age) {
+//   //   this.name = name
+//   //   this.age = age
+//   let data = { name, age }
+//   let info = function () {
+//     return data.age > 50 ? '老年' : '青年'
+//   }
+//   this.show = function () {
+//     console.log(`${data.name}是${info()}`)
+//   }
+// }
+// let wmg = new User('王妙歌', 18)
+// wmg.info = function () {
+//   console.log(this)
+//   return ''
+// }
+// wmg.name = 'aaa'
+// wmg.show()
+
+/*
+    对象属性特征
+*/
+const user = {
+  name: '王妙歌',
+  age: 18,
 }
+console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user, 'age'), null, 2))
+Object.defineProperty(user, 'name', {
+  value: '后盾人',
+})
+console.log(user)
+console.log(user.name)
