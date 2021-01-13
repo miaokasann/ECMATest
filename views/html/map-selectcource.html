@@ -85,7 +85,7 @@
       </ul>
     </div>
     <div>
-      <strong id="count">共选了2门课</strong>
+      <strong id="count"></strong>
       <p id="lists"></p>
     </div>
   </body>
@@ -93,33 +93,50 @@
     class Lesson {
       constructor() {
         this.lists = document.querySelectorAll('ul>li')
-        this.countElem = document.getElementById('#count')
-        this.listElem = document.getElementById('#lists')
+        this.countElem = document.getElementById('count')
+        this.listElem = document.getElementById('lists')
         this.map = new WeakMap()
       }
       run() {
         this.lists.forEach((li) => {
           li.querySelector('a').addEventListener('click', (event) => {
             const a = event.target
-            console.log(a)
             const state = li.getAttribute('select')
             if (state) {
               li.removeAttribute('select')
               this.map.delete(li)
-              a.innerHtml = '+'
+              a.innerHTML = '+'
               a.style.backgroundColor = 'green'
             } else {
               this.map.set(li)
               li.setAttribute('select', true)
-              a.innerHtml = '-'
+              a.innerHTML = '-'
               a.style.backgroundColor = 'red'
             }
-            console.log(this.map)
+            this.render()
           })
         })
       }
+      count() {
+        return [...this.lists].reduce((count, li) => {
+          return (count += this.map.has(li) ? 1 : 0)
+        }, 0)
+      }
+      list() {
+        return [...this.lists]
+          .filter((item) => {
+            return this.map.has(item)
+          })
+          .map((li) => {
+            return `<span>${li.querySelector('span').innerHTML}</span>`
+          })
+          .join('')
+      }
+      render() {
+        this.countElem.innerHTML = `共选了${this.count()}门课`
+        this.listElem.innerHTML = this.list()
+      }
     }
-
     new Lesson().run()
   </script>
 </html>

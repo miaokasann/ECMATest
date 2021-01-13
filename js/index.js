@@ -512,4 +512,67 @@
 //   console.log(key, value)
 // }
 
-let a = 0
+/*
+  函数参数 arguments
+*/
+// function sum() {
+//   console.log(arguments)
+//   return [...arguments].reduce((a, b) => {
+//     return a + b
+//   })
+// }
+
+// console.log(sum(1, 34, 4, 7, 85, 43))
+
+/*
+  函数完成递归算法
+*/
+
+// function factirial(num) {
+//   if (num == 1) {
+//     return 1
+//   }
+//   return num * factirial(num - 1)
+// }
+
+//递归求和
+// function sum(...arg) {
+//   console.log(arg)
+//   return arg.length == 0 ? 0 : arg.pop() + sum(...arg)
+// }
+// console.log(sum(1, 34, 4, 7, 85, 43))
+
+//递归实现倒三角
+// function star(num) {
+//   // if (num == 0) {
+//   //   return ''
+//   // }
+//   // document.write('*'.repeat(num) + '</br>')
+//   // star(--num)
+//   return num ? document.write('*'.repeat(num) + '</br>') || star(--num) : ''
+// }
+// console.log(star(8))
+
+//递归附加参数使用技巧
+let Lesson = [
+  {
+    title: '咖啡',
+    price: 5,
+  },
+  {
+    title: '护手霜',
+    price: 20,
+  },
+  {
+    title: '水杯',
+    price: 50,
+  },
+]
+function change(lessons, num = 100, i = 0) {
+  if (i == lessons.length) {
+    return lessons
+  }
+  lessons[i].price += num
+  return change(lessons, num, ++i)
+}
+console.table(change(Lesson))
