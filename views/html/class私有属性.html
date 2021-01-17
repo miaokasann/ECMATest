@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // class User {
+      //   //private
+      //   #host = 'https://houdunren.com'
+      //   constructor(name) {
+      //     this.name = name
+      //     this.#check(name)
+      //   }
+      //   set host(url) {
+      //     if (!/^https?:/i.test(url)) {
+      //       throw new Error('非常网址')
+      //     }
+      //     this.#host = url
+      //   }
+      //   get host() {
+      //     return this.#host
+      //   }
+      //   #check = () => {
+      //     if (this.name.length <= 5) {
+      //       throw new Error('用户名长度不能小于五位')
+      //     }
+      //     return true
+      //   }
+      // }
+      // let hd = new User('后盾人在线教程')
+      // hd.host = 'https://www.hdcms.com'
+      // console.log(hd.host)
+
+      class User {
+        static site = 'houdunren.com'
+        static show() {
+          console.log('user.static.show')
+        }
+      }
+      class Admin extends User {}
+      console.dir(Admin.site)
+      Admin.show()
+    </script>
+  </body>
+</html>

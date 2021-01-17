@@ -770,8 +770,8 @@
 // let miao = copy(hd)
 // console.log(miao)
 
-function hd(name) {}
-console.log(hd.constructor)
+// function hd(name) {}
+// console.log(hd.constructor)
 
 //抽象
 // function User(name, age) {
@@ -796,13 +796,676 @@ console.log(hd.constructor)
 /*
     对象属性特征
 */
-const user = {
-  name: '王妙歌',
-  age: 18,
-}
-console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user, 'age'), null, 2))
-Object.defineProperty(user, 'name', {
-  value: '后盾人',
-})
-console.log(user)
-console.log(user.name)
+// const user = {
+//   name: '王妙歌',
+//   age: 18,
+// }
+// console.log(JSON.stringify(Object.getOwnPropertyDescriptor(user, 'age'), null, 2))
+// Object.defineProperty(user, 'name', {
+//   value: '后盾人',
+// })
+// console.log(user)
+// console.log(user.name)
+
+/*
+    js 原型
+*/
+// let mg = {}
+// let wmg = {}
+// console.log(Object.getPrototypeOf(mg))
+// console.log(Object.getPrototypeOf(mg) == Object.getPrototypeOf(wmg))
+
+// //完全数据字典对象 使用这种方法创建的对象是没有原型的
+// let hd = Object.create(null, {
+//   name: {
+//     value: '后盾人',
+//   },
+// })
+// console.log(Object.getPrototypeOf(hd))
+// console.log(hd.hasOwnProperty('name'))
+
+// let hd = {
+//   show() {
+//     console.log('后盾人')
+//   },
+//   render() {
+//     console.log('hd . render')
+//   },
+// }
+// hd.__proto__.render = function () {
+//   console.log('向军')
+// }
+// console.log(hd)
+
+// hd.render()
+
+// let hd = new Object()
+// hd.name = '后盾人'
+// Object.prototype.show = function () {
+//   console.log('hodunren.com')
+// }
+// hd.show()
+
+// function User() {}
+// console.dir(User)
+// let xj = new User()
+// xj.show()
+// User.show()
+
+// function User() {
+//   this.name = name
+// }
+// let hd = new User('mg')
+// function createByObject(obj, ...args) {
+//   const constructor = Object.getPrototypeOf(obj).constructor
+//   return new constructor(...args)
+// }
+// let xj = createByObject(hd, '向军')
+// xj.show()
+
+// let hd = {
+//   d: [1, 2, 3, 4, 5, 6],
+// }
+// Object.setPrototypeOf(hd, {
+//   max: function () {
+//     return this.d.sort((a, b) => b - a)[0]
+//   },
+// })
+// console.log(hd.max())
+
+// let xj = {
+//   lessons: {
+//     js: 88,
+//     php: 100,
+//     node: 99,
+//   },
+//   get d() {
+//     return Object.values(this.lessons)
+//   },
+// }
+// console.log(hd.max.call(xj))
+
+// let User = {
+//   show() {
+//     return this.name
+//   },
+// }
+//定义对象的原型，不能获取原型
+// let hd = Object.create(User, {
+//   name: {
+//     value: '后盾人',
+//   },
+// })
+// hd.name = 'miaokasann'
+
+//2.设置原型方法2
+// hd.__proto__ = User
+// let hd = { name: '王妙歌' }
+//3.官方设置原型的方法
+// Object.setPrototypeOf(hd, User)
+// console.log(hd.show())
+
+//__proto__是属性访问器
+// let hd = {
+//   name: '王妙歌',
+// }
+// hd.__proto__ = {
+//   show() {
+//     console.log(this.name)
+//   },
+// }
+// hd.__proto__ = 99
+// console.log(hd.__proto__)
+
+//使用父类函数初始属性
+// function User(name, age) {
+//   this.name = name
+//   this.age = age
+// }
+// User.prototype.show = function () {
+//   console.log(this.name, this.age)
+// }
+
+// function Admin(...args) {
+//   User.apply(this, args)
+// }
+// Admin.prototype = Object.create(User.prototype)
+
+// let xj = new Admin('向军', 18)
+// xj.show()
+
+// console.log(Admin.prototype)
+// console.log(User.prototype)
+
+//使用原型工厂封装继承
+//sub继承sup
+// function extend(sub, sup) {
+//   sub.prototype = Object.create(sup.prototype)
+//   Object.defineProperty(sub.prototype, 'constructor', {
+//     value: sub,
+//     enumerable: false,
+//   })
+// }
+
+// function User(name) {
+//   this.name = name
+//   console.log(this)
+// }
+// User.prototype.getUserName = function () {
+//   return this.name
+// }
+// function Admin(name) {
+//   User.call(this, name)
+// }
+// // Admin.prototype = Object.create(User.prototype)
+// Admin.prototype.role = function () {}
+// let xj = new Admin('向军大叔')
+// //sub继承sup
+// function extend(sub, sup) {
+//   sub.prototype = Object.create(sup.prototype)
+//   sub.prototype.constructor = sub
+// }
+// extend(Admin, User)
+// console.dir(Admin)
+
+// function User(name, age) {
+//   this.name = name
+//   this.age = age
+// }
+// User.prototype.show = function () {
+//   console.log(this.name, this.age)
+// }
+// function Admin(name, age) {
+//   let instance = Object.create(User.prototype)
+//   User.call(instance, name, age)
+//   instance.role = function () {
+//     console.log('admin.role')
+//   }
+//   return instance
+// }
+// let hd = Admin('后盾人', 19)
+// hd.role()
+// function member(name, age) {
+//   let instance = Object.create(User.prototype)
+//   User.call(instance, name, age)
+//   return instance
+// }
+// let lisi = member('李四', 28)
+// lisi.role()
+
+// function extend(sub, sup) {
+//   sub.prototype = Object.create(sup.prototype)
+//   sub.prototype.constructor = sub
+// }
+// function Credit() {}
+// function Request() {}
+// function User(name, age) {
+//   this.name = name
+//   this.age = age
+// }
+// extend(Request, Credit)
+// extend(User, Request)
+// Credit.prototype.total = function () {
+//   console.log('统计积分')
+// }
+// Request.prototype.ajax = function () {
+//   console.log('请求后台')
+// }
+// User.prototype.show = function () {
+//   console.log(this.name, this.age)
+// }
+// function Admin(...args) {
+//   User.apply(this, args)
+// }
+// extend(Admin, User)
+// let hd = new Admin('向军', 19)
+// hd.show()
+// hd.total() //统计积分
+// hd.ajax() //请求后台
+
+// function extend(sub, sup) {
+//   sub.prototype = Object.create(sup.prototype)
+//   sub.prototype.constructor = sub
+// }
+// function User(name, age) {
+//   this.name = name
+//   this.age = age
+// }
+// User.prototype.show = function () {
+//   console.log(this.name, this.age)
+// }
+// const Credit = {
+//   total() {
+//     console.log('统计积分')
+//   },
+// }
+// const Request = {
+//   ajax() {
+//     console.log('请求后台')
+//   },
+// }
+
+// function Admin(...args) {
+//   User.apply(this, args)
+// }
+// extend(Admin, User)
+// Object.assign(Admin.prototype, Request, Credit)
+// let hd = new Admin('向军', 19)
+// hd.show()
+// hd.total() //统计积分
+// hd.ajax() //请求后台
+
+// function extend(sub, sup) {
+//   sub.prototype = Object.create(sup.prototype)
+//   sub.prototype.constructor = sub
+// }
+// function User(name, age) {
+//   this.name = name
+//   this.age = age
+// }
+// User.prototype.show = function () {
+//   console.log(this.name, this.age)
+// }
+// const Request = {
+//   ajax() {
+//     return '请求后台'
+//   },
+// }
+// const Credit = {
+//   __proto__: Request,
+//   total() {
+//     console.log(super.ajax() + ',统计积分')
+//   },
+// }
+
+// function Admin(...args) {
+//   User.apply(this, args)
+// }
+// extend(Admin, User)
+// Object.assign(Admin.prototype, Request, Credit)
+// let hd = new Admin('向军', 19)
+// console.log(Admin.prototype)
+// console.log(Credit)
+
+// hd.show()
+// hd.total() //统计积分
+// hd.ajax() //请求后台
+
+// function User() {}
+// User.__proto__.view = function () {
+//   console.log('我是user构造函数的view方法')
+// }
+// User.prototype.show = function () {
+//   console.log('我是user原型上的方法')
+// }
+// User.view()
+// console.dir(User)
+
+// let hd = new User()
+// // hd.view()
+// console.dir(hd)
+// console.dir(User.__proto__.__proto__ == Object.prototype)
+
+//__proto__上的方法一般是给构造函数自己使用的
+//prototype原型上的方法提供给实例化出的对象使用
+
+// function User() {}
+// let xj = new User()
+// console.log(xj.__proto__ == User.prototype)
+
+// console.dir(xj)
+
+// let hd = {}
+// let parent = { name: 'parent' }
+// Object.setPrototypeOf(hd, parent) //把hd的原型设为parent
+// console.log(hd)
+// console.log(Object.getPrototypeOf(hd))
+
+// function hd() {
+//   this.show = function () {
+//     return 'show method'
+//   }
+// }
+// const obj = new hd() //true
+// console.log(obj.constructor)
+// console.dir(hd)
+
+// console.log(obj instanceof hd)
+
+// const obj2 = new obj.constructor()
+// console.dir(obj2.show()) //show method
+
+// 'use strict'
+// function User() {}
+// User.prototype.getName = function () {
+//   return this.name
+// }
+
+// function Stu(name) {
+//   this.name = name
+// }
+// Stu.prototype = new User()
+// const lisi = new Stu('李四')
+
+// console.log(lisi.__proto__)
+// console.log(lisi.getName())
+
+/*
+    类
+*/
+//class语法糖的声明的方法是不可以遍历的
+// class User {
+//   constructor(name) {
+//     this.name = name
+//   }
+//   show() {}
+// }
+// let u = new User('aaa')
+// console.log(User)
+// console.log(JSON.stringify(Object.getOwnPropertyDescriptor(User.prototype, 'show'), null, 2))
+// for (const i in u) {
+//   console.log(i)
+// }
+
+//class默认使用严格模式
+// class User {
+//   show() {
+//     function test() {
+//       console.log(this)
+//     }
+//     test()
+//   }
+// }
+// let hd = new User()
+// hd.show()
+
+//静态属性，分配给构造函数的属性我们叫它静态属性
+// class Request {
+//   static HOST = 'https://www.houdunren.com'
+
+//   query(api) {
+//     return Request.HOST + '/' + api
+//   }
+// }
+// let request = new Request()
+
+// class User {
+//   constructor(name) {
+//     this.name = name
+//   }
+//   static create(name) {
+//     return new User(name)
+//   }
+// }
+// const xj = User.create('向军大叔')
+// console.log(xj)
+
+/*
+    静态方法练习
+*/
+// const data = [
+//   { name: 'js', price: 100 },
+//   { name: 'mysql', price: 212 },
+//   { name: 'vue.js', price: 98 },
+// ]
+// class Lesson {
+//   constructor(data) {
+//     this.model = data
+//   }
+//   get price() {
+//     return this.model.price
+//   }
+//   get name() {
+//     return this.model.name
+//   }
+//   static createBatch(data) {
+//     return data.map((item) => new Lesson(item))
+//   }
+//   static maxPrice(data) {
+//     return data.sort((a, b) => b.price - a.price)[0]
+//   }
+// }
+// const lessons = Lesson.createBatch(data)
+// console.log(lessons)
+// console.log(Lesson.maxPrice(lessons).name)
+
+//访问器在类中的使用
+// class User {
+//   constructor(name) {
+//     this.data = { name }
+//   }
+//   get name() {
+//     return this.data.name
+//   }
+//   set name(value) {
+//     if (value.trim() == '') throw new Error('invalid params')
+//     this.data.name = value
+//   }
+// }
+// let hd = new User('miaokasann')
+// console.log(hd)
+
+// hd.name = '王妙歌'
+// console.log(hd.name)
+
+//属性的保护
+//使用symbol
+// const protecteds = Symbol()
+// class Common {
+//   constructor() {
+//     this[protecteds] = {}
+//     this[protecteds].host = 'https://houdunren.com'
+//   }
+//   set host(url) {
+//     if (!/^https?:/i.test(url)) {
+//       throw new Error('非常网址')
+//     }
+//     this[protecteds].host = url
+//   }
+//   get host() {
+//     return this[protecteds].host
+//   }
+// }
+// class User extends Common {
+//   constructor(name) {
+//     super()
+//     this[protecteds].name = name
+//   }
+//   get name() {
+//     return this[protecteds].name
+//   }
+// }
+// let hd = new User('后盾人')
+// hd.host = 'https://www.hdcms.com'
+// console.log(hd[Symbol()])
+// console.log(hd.host)
+
+//使用weakmap
+// const host = new WeakMap()
+// class Common {
+//   constructor(name) {
+//     this.name = name
+//     host.set(this, 'http://www.houdunren.com')
+//   }
+//   set host(url) {
+//     if (!/^https?:/i.test(url)) {
+//       throw new Error('非常网址')
+//     }
+//     host.set(this, url)
+//   }
+//   get host() {
+//     return host.get(this)
+//   }
+// }
+// let hd = new Common('miaokasann.com')
+// console.log(hd.host)
+
+// const protecteds = new WeakMap()
+// class Common {
+//   constructor() {
+//     protecteds.set(this, {
+//       host: 'https://houdunren.com',
+//       port: '80',
+//     })
+//   }
+//   set host(url) {
+//     if (!/^https:\/\//i.test(url)) {
+//       throw new Error('网址错误')
+//     }
+//     console.log(protecteds.get(this))
+
+//     protecteds.set(this, { ...protecteds.get(this), host: url })
+//   }
+// }
+// class Article extends Common {
+//   constructor() {
+//     super()
+//   }
+//   lists() {
+//     return `${protecteds.get(this).host}/article`
+//   }
+// }
+// let article = new Article()
+// console.log(article.lists()) //https://houdunren.com/article
+// article.host = 'https://hdcms.com'
+// console.log(article.lists()) //https://hdcms.com/article
+
+// class User {
+//   constructor(name) {
+//     this.name = name
+//   }
+//   show() {
+//     console.log(333)
+//   }
+// }
+// class Admin extends User {
+//   constructor(name) {
+//     super(name)
+//   }
+// }
+// let hd = new Admin('miaokasann')
+// console.dir(Admin)
+
+// class Controller {
+//   sum() {
+//     // console.log('parent method')
+//     return this.data.reduce((t, c) => t + c.price, 0)
+//   }
+// }
+// class Lesson extends Controller {
+//   constructor(data) {
+//     super()
+//     this.data = data
+//   }
+//   info() {
+//     return {
+//       totalPrice: super.sum(),
+//       data: this.data,
+//     }
+//   }
+// }
+// let data = [
+//   { name: 'js', price: 100 },
+//   { name: 'mysql', price: 212 },
+//   { name: 'vue.js', price: 98 },
+// ]
+// let hd = new Lesson(data)
+// console.log(hd.info())
+
+// function User() {}
+// User.site = '后盾人'
+// User.url = function () {
+//   return 'houdunren.com'
+// }
+// function Admin() {}
+// Admin.__proto__ = User
+// console.dir(Admin)
+// console.log(Admin.url())
+
+// function User() {}
+// function Admin() {}
+// Admin.prototype = Object.create(User.prototype)
+// let hd = new Admin()
+// //验证admin的原型是否在hd的原型链上
+// console.log(hd instanceof Admin) //true
+// console.log(hd instanceof User) //true
+
+// console.log(hd.__proto__ == Admin.prototype)
+// console.log(hd.__proto__.__proto__ == User.prototype)
+
+// function checkPrototype(obj, constructor) {
+//   if (!obj.__proto__) return false
+//   debugger
+//   console.log(obj.__proto__ == constructor.prototype)
+//   if (obj.__proto__ == constructor.prototype) return true
+//   return checkPrototype(obj.__proto__, constructor)
+// }
+// checkPrototype(hd, User)
+
+// let a = {}
+// let b = {
+//   __proto__: a,
+// }
+// console.log(a.isPrototypeOf(b))
+
+// class User {}
+// class Admin extends User {}
+// let hd = new Admin()
+// console.log(Admin.prototype.isPrototypeOf(hd))
+
+// function Arr(...args) {
+//   console.log(args)
+//   console.log(this)
+//   args.forEach((item) => this.push(item))
+//   this.first = function () {
+//     return this[0]
+//   }
+// }
+// Arr.prototype = Object.create(Array.prototype)
+// console.dir(Arr)
+// let hd = new Arr(1, 3, 5, 66, 65)
+// console.log(hd.first())
+
+// class Arr extends Array {
+//   constructor(...args) {
+//     super(...args)
+//   }
+//   first() {
+//     return this[0]
+//   }
+//   add(...args) {
+//     this.push(...args)
+//   }
+//   remove(value) {
+//     let pos = this.findIndex((item) => item == value)
+//     this.splice(pos, 1)
+//   }
+// }
+
+// let hd = new Arr(1, 3, 5, 66, 65)
+// hd.remove(3)
+// hd.add(3, 5)
+// console.log(hd)
+
+//混合类
+// const Tool = {
+//   max(key) {
+//     return this.data.sort((a, b) => b[key] - a[key])[0]
+//   },
+// }
+// class Lesson {
+//   constructor(lessons) {
+//     this.lessons = lessons
+//   }
+//   get data() {
+//     return this.lessons
+//   }
+// }
+// Object.assign(Lesson.prototype, Tool)
+// const data = [
+//   { name: 'js', price: 100 },
+//   { name: 'mysql', price: 212 },
+//   { name: 'vue.js', price: 98 },
+// ]
+// let hd = new Lesson(data)
+// console.log(hd.max('price'))

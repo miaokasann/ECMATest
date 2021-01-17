@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>借用array的方法操作dom</title>
+  </head>
+  <body>
+    <button message="后盾人" class="red">后盾人</button>
+    <button message="hdcms">hdcms</button>
+  </body>
+  <script>
+    let btns = document.querySelectorAll('button')
+    console.log(btns)
+
+    btns = Array.prototype.filter.call(btns, (item) => {
+      return item.hasAttribute('class')
+    })
+    console.log(btns)
+  </script>
+</html>
