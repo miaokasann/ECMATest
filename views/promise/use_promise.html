@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写promise</title>
+    <script src="HD.js"></script>
+  </head>
+  <body></body>
+  <script>
+    let p = new HD((resolve, reject) => {
+      setTimeout(() => {
+        reject('success')
+      }, 2000)
+    })
+      .then(
+        (value) => {
+          // console.log(value)
+          // return '妙卡桑'
+          return new HD((resolve, reject) => {
+            resolve('fjkdsnfjkds')
+          })
+        },
+        (reason) => {
+          return new HD((resolve, reject) => {
+            resolve('jhgjhgjhg')
+          })
+        }
+      )
+      .then(
+        (value) => {
+          console.log(value)
+        },
+        (reason) => {
+          console.log(reason)
+        }
+      )
+    // console.log('后盾人')
+  </script>
+</html>
