@@ -62,35 +62,35 @@
       </dd>
     </div>
     <script>
-      class Ani {
+      //动画类 提供隐藏和显示的方法
+      class Animation {
         constructor(el) {
           this.el = el
+          this.timeout = 5
           this.isShow = true
           this.defaultHeight = this.height
-          console.log(this.defaultHeight)
         }
         hide(callBack) {
           this.isShow = false
           let id = setInterval(() => {
-            this.height = this.height - 1
             if (this.height <= 0) {
               clearInterval(id)
               callBack && callBack()
             }
-          }, 10)
+            this.height = this.height - 1
+          }, this.timeout)
         }
         show(callBack) {
           this.isShow = false
           let id = setInterval(() => {
-            this.height = this.height + 1
             if (this.height >= this.defaultHeight) {
               clearInterval(id)
               callBack && callBack()
             }
-          }, 10)
+            this.height = this.height + 1
+          }, this.timeout)
         }
         get height() {
-          console.log(this.el)
           return window.getComputedStyle(this.el).height.slice(0, -2) * 1
         }
         set height(height) {
@@ -101,35 +101,38 @@
       class Slide {
         constructor(el) {
           this.el = document.querySelector(el)
-          console.log(this.el)
-
           this.links = this.el.querySelectorAll('dt')
-          console.log(this.links)
-          console.log(this.el.querySelectorAll('dd'))
-
-          this.pannels = [...this.el.querySelectorAll('dd')].map((item) => new Pannel())
-          console.log(this.pannels)
+          this.pannels = [...this.el.querySelectorAll('dd')].map((item) => new Pannel(item))
           this.bind()
+          Pannel.hideAll(this.pannels)
         }
+        //给每个link添加上点击事件
         bind() {
           this.links.forEach((item, i) => {
-            item.addEventListener('click', function () {
+            item.addEventListener('click', () => {
               this.action(i)
             })
           })
         }
         action(i) {
-          Pannel.hideAll(Pannel.filter(this.pannels, i))
-          this.pannels[i].show()
+          Pannel.hideAll(Pannel.filter(this.pannels, i), () => {
+            this.pannels[i].show()
+          })
         }
       }
 
-      class Pannel extends Ani {
-        constructor() {
-          super()
-        }
-        static hideAll(items) {
-          items.forEach((item) => item.hide(item))
+      //继承动画类 具体到筛选出哪一个面板需要显示和隐藏
+      class Pannel extends Animation {
+        static num = 0
+        static hideAll(items, callBack) {
+          if (this.num > 0) return
+          items.forEach((item) => {
+            this.num++
+            item.hide(() => {
+              this.num--
+            })
+          })
+          callBack && callBack()
         }
         static filter(items, i) {
           return items.filter((item, index) => index != i)

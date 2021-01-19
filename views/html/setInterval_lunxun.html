@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>setInterval_轮询</title>
+    <style>
+      div {
+        background-color: aquamarine;
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+      let div = document.querySelector('div')
+      console.log(window.getComputedStyle(div))
+      function Interval(callBack, delay = 60) {
+        let timer = setInterval(callBack, delay)
+      }
+      Interval((timeId) => {
+        let left = parseInt(window.getComputedStyle(div).left)
+        div.style.left = left + 10 + 'px'
+      })
+    </script>
+  </body>
+</html>

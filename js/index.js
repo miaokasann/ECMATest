@@ -1469,3 +1469,361 @@
 // ]
 // let hd = new Lesson(data)
 // console.log(hd.max('price'))
+// class User {
+//   constructor(name) {
+//     this.name = name
+//   }
+//   show() {
+//     console.log(this.name)
+//   }
+// }
+// let xj = new User('向军')
+// //不会枚举出show属性
+// for (const key in xj) {
+//   console.log(key)
+// }
+
+// function Hd(name) {
+//   this.name = name
+// }
+// Hd.prototype.show = function () {
+//   console.log(this.name)
+// }
+// let obj = new Hd('后盾人')
+// for (const key in obj) {
+//   console.log(key)
+// }
+
+/*
+  模块化
+*/
+// let module = (function () {
+//   const moduleList = []
+//   //这个方法帮助我们定义模块
+//   function define(name, modules, action) {
+//     modules.map((m, i) => {
+//       modules[i] = moduleList[m]
+//     })
+//     moduleList[name] = action.apply(null, modules)
+//     console.log(moduleList)
+//   }
+//   return {
+//     define,
+//   }
+// })()
+// module.define('hd', [], function () {
+//   return {
+//     first(arr) {
+//       return arr[0]
+//     },
+//     max(arr, key) {
+//       return arr.sort((a, b) => b[key] - a[key])[0]
+//     },
+//     site: 'wangmiaoge',
+//   }
+// })
+
+// module.define('lesson', ['hd'], function (hd) {
+//   let data = [
+//     { name: 'js', price: 99 },
+//     { name: 'mysql', price: 78 },
+//   ]
+//   hd.max(data, 'price')
+//   console.log(hd.max(data, 'price'))
+//   hd.site = 'miaokasann'
+//   console.log(hd.site)
+// })
+
+/*
+  promise
+*/
+// console.log(
+//   new Promise((resolve, reject) => {
+//     // resolve('success')
+//     reject('失败')
+//   })
+// )
+
+// let promise = new Promise((resolve, reject) => {
+//   resolve('fulfilled') //3
+//   console.log('后盾人') //1
+// })
+// promise.then((msg) => {
+//   console.log(msg)
+// })
+// console.log('houdunren.com') //2
+
+// const promise = new Promise((resolve) => resolve('success'))
+// promise.then(alert) //2
+// alert('houdunren.com') //1
+// promise.then(() => {
+//   alert('后盾人') //3
+// })
+
+// new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('fulfilled')
+//   }, 3000)
+// }).then(
+//   (msg) => {
+//     console.log(msg)
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
+
+// const p1 = new Promise((resolve, reject) => {
+//   // resolve("fulfilled");
+//   reject('rejected')
+// })
+// const p2 = new Promise((resolve) => {
+//   resolve(p1)
+// }).then(
+//   (value) => {
+//     console.log(value)
+//   },
+//   (reason) => {
+//     console.log(reason)
+//   }
+// )
+
+// const p1 = new Promise((resolve, reject) => {
+//   resolve(
+//     //p2
+//     new Promise((s, e) => {
+//       s('成功')
+//     })
+//   )
+// }).then((msg) => {
+//   console.log(msg)
+// })
+
+// const p1 = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('操作成功')
+//   }, 2000)
+// })
+// const p2 = new Promise((resolve, reject) => {
+//   resolve(p1)
+// }).then(
+//   (msg) => {
+//     console.log(msg)
+//   },
+//   (error) => {
+//     console.log(error)
+//   }
+// )
+
+// let promise = new Promise((resolve, reject) => {
+//   resolve('resolve')
+// })
+// let p2 = promise.then()
+// promise
+//   .then()
+//   .then()
+//   .then((resolve) => {
+//     console.log(resolve)
+//   })
+
+// let promise = new Promise((resolve, reject) => {
+//   reject('reject')
+// })
+// let p2 = promise.then(() => {})
+// promise
+//   .then(
+//     () => {},
+//     (reject) => {
+//       console.log(reject)
+//     }
+//   )
+//   .then(null, null)
+//   .then(null, (reject) => {
+//     console.log(reject)
+//   })
+
+// let promise = new Promise((resolve) => resolve())
+// let p1 = promise
+//   .then(() => {
+//     return new Promise((resolve) => {
+//       setTimeout(() => {
+//         console.log(`p1`)
+//         resolve()
+//       }, 2000)
+//     })
+//   })
+//   .then(() => {
+//     return new Promise((a, b) => {
+//       console.log(`p2`)
+//     })
+//   })
+
+// new Promise((resolve, reject) => {
+//   resolve()
+// })
+//   .then((v) => {
+//     return new Promise((resolve, reject) => {
+//       resolve('第二个promise')
+//     }).then((value) => {
+//       console.log(value)
+//       // return value
+//     })
+//   })
+//   .then((value) => {
+//     console.log(value)
+//   })
+
+// new Promise((resolve, reject) => {
+//   resolve(
+//     new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve('解决状态')
+//       }, 2000)
+//     })
+//   )
+// })
+//   .then(
+//     (v) => {
+//       console.log(`fulfilled: ${v}`)
+//       return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//           reject('失败状态')
+//         }, 2000)
+//       })
+//     },
+//     (v) => {
+//       console.log(`rejected: ${v}`)
+//     }
+//   )
+//   .catch((error) => console.log(`rejected: ${error}`))
+
+// new Promise((resolve, reject) => {
+//   resolve('success')
+// })
+//   .then((msg) => {
+//     console.log(a)
+//   })
+//   .catch((reason) => {
+//     console.log('error:' + reason)
+//   })
+
+// const promise = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     throw new Error('fail')
+//   }, 2000)
+// }).catch((msg) => {
+//   console.log(msg + '后盾人')
+// })
+
+// const promise = new Promise((resolve, reject) => {
+//   reject()
+// })
+//   .catch((msg) => {
+//     hd()
+//   })
+//   .then(null, (error) => {
+//     console.log(error)
+//   })
+
+// const promise = new Promise((resolve, reject) => {
+//   resolve('后盾人')
+// })
+
+// console.log(
+//   promise.then((hd) => {
+//     hd += '-hdcms'
+//     console.log(hd)
+//   })
+// ) //Promise {<pending>}
+
+// new Promise((resolve, reject) => {
+//   resolve('第一个promise')
+// })
+//   .then((msg) => {
+//     console.log(msg)
+//     return new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve('第二个promise')
+//       }, 3000)
+//     })
+//   })
+//   .then((msg) => {
+//     console.log(msg)
+//   })
+
+// const hdcms = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('第一个Promise')
+//   }, 1000)
+// })
+// const houdunren = new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     resolve('第二个异步')
+//   }, 1000)
+// })
+// const hd = Promise.all([hdcms, houdunren])
+//   .then((results) => {
+//     console.log(results)
+//   })
+//   .catch((msg) => {
+//     console.log(msg)
+//   })
+
+/*
+promise任务队列
+*/
+//then中返回promise那么后面的then就是对返回的promise得处理
+// function queue(num) {
+//   let promise = Promise.resolve('成功')
+//   num.map((v) => {
+//     console.log(promise)
+//     promise = promise.then(() => {
+//       return v()
+//     })
+//   })
+// }
+
+// function p1() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       console.log('p1')
+//       resolve()
+//     }, 1000)
+//   })
+// }
+
+// function p2() {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       console.log('p2')
+//       resolve()
+//     }, 1000)
+//   })
+// }
+
+// function queue(num) {
+//   return num.reduce((promise, v) => {
+//     return promise.then(() => {
+//       return v()
+//     })
+//   }, Promise.resolve())
+// }
+
+// queue([p1, p2])
+
+async function sleep(delay = 2000) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve()
+    }, delay)
+  })
+}
+
+async function show() {
+  for (const user of ['王妙歌', 'miaokasann']) {
+    await sleep()
+    console.log(user)
+  }
+}
+
+show()

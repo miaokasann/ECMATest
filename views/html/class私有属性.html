@@ -34,15 +34,46 @@
       // hd.host = 'https://www.hdcms.com'
       // console.log(hd.host)
 
-      class User {
-        static site = 'houdunren.com'
-        static show() {
-          console.log('user.static.show')
+      // class User {
+      //   static site = 'houdunren.com'
+      //   static show() {
+      //     console.log('user.static.show')
+      //   }
+      // }
+      // class Admin extends User {}
+      // console.dir(Admin.site)
+      // Admin.show()
+
+      // class User {
+      //   site = '后盾人'
+      //   constructor(name) {
+      //     this.name = name
+      //   }
+      //   show() {
+      //     console.log(this.site + ':' + this.name)
+      //   }
+      // }
+      // let hd = new User('向军')
+      // hd.show()
+
+      class Article {
+        _host = 'https://houdunren.com'
+
+        set host(url) {
+          if (!/^https:\/\//i.test(url)) {
+            throw new Error('网址错误')
+          }
+          this._host = url
+        }
+
+        lists() {
+          return `${this._host}/article`
         }
       }
-      class Admin extends User {}
-      console.dir(Admin.site)
-      Admin.show()
+      let article = new Article()
+      console.log(article.lists()) //https://houdunren.com/article
+      article._host = 'https://hdcms.com'
+      console.log(article.lists()) //https://hdcms.com/article
     </script>
   </body>
 </html>
