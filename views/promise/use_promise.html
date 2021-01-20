@@ -8,33 +8,88 @@
   </head>
   <body></body>
   <script>
-    let p = new HD((resolve, reject) => {
+    // let p = new HD((resolve, reject) => {
+    //   setTimeout(() => {
+    //     resolve('success')
+    //   }, 2000)
+    // })
+    //   .then(
+    //     (value) => {
+    //       // console.log(value)
+    //       // return '妙卡桑'
+    //       let p = new HD((resolve, reject) => {
+    //         resolve('fjkdsnfjkds')
+    //         // return p
+    //       })
+    //       let promise = p.then((value) => {
+    //         return promise
+    //       })
+    //     },
+    //     (reason) => {
+    //       return new HD((resolve, reject) => {
+    //         reject('jhgjhgjhg')
+    //       })
+    //     }
+    //   )
+    //   .then(
+    //     (value) => {
+    //       console.log(value)
+    //     },
+    //     (reason) => {
+    //       console.log(reason)
+    //     }
+    //   )
+    // console.log('后盾人')
+    // let p = new HD((resolve, reject) => {
+    //   reject('拒绝')
+    // })
+    // HD.resolve(p).then(
+    //   (value) => {
+    //     console.log(value)
+    //   },
+    //   (reason) => {
+    //     console.log(reason)
+    //   }
+    // )
+    // let p = new HD((resolve, reject) => {
+    //   reject('拒绝')
+    // })
+    // HD.reject(p).then(null, (reason) => {
+    //   console.log(reason)
+    // })
+
+    // let a = new HD((resolve, reject) => {
+    //   resolve('a成功')
+    // })
+    // let b = new HD((resolve, reject) => {
+    //   reject('b成功')
+    // })
+    // HD.all([a, b]).then(
+    //   (value) => {
+    //     console.log(value)
+    //   },
+    //   (reason) => {
+    //     console.log(reason)
+    //   }
+    // )
+
+    let a = new HD((resolve, reject) => {
       setTimeout(() => {
-        reject('success')
+        resolve('a成功')
       }, 2000)
     })
-      .then(
-        (value) => {
-          // console.log(value)
-          // return '妙卡桑'
-          return new HD((resolve, reject) => {
-            resolve('fjkdsnfjkds')
-          })
-        },
-        (reason) => {
-          return new HD((resolve, reject) => {
-            resolve('jhgjhgjhg')
-          })
-        }
-      )
-      .then(
-        (value) => {
-          console.log(value)
-        },
-        (reason) => {
-          console.log(reason)
-        }
-      )
-    // console.log('后盾人')
+    let b = new HD((resolve, reject) => {
+      setTimeout(() => {
+        reject('b成功')
+      }, 1000)
+    })
+    HD.race([a, b]).then(
+      (value) => {
+        console.log(value)
+      },
+      (reason) => {
+        console.log(reason)
+      }
+    )
   </script>
 </html>

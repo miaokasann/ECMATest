@@ -1811,19 +1811,148 @@ promise任务队列
 
 // queue([p1, p2])
 
-async function sleep(delay = 2000) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve()
-    }, delay)
+// async function sleep(delay = 2000) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve()
+//     }, delay)
+//   })
+// }
+
+// async function show() {
+//   for (const user of ['王妙歌', 'miaokasann']) {
+//     await sleep()
+//     console.log(user)
+//   }
+// }
+
+// show()
+
+// script start
+// Promise
+// 1111
+// async2 end
+// script end
+// promise1
+// promise2
+// async1 end
+// setTimeout
+
+console.log('script start')
+
+// async function async1() {
+//   await async2()
+//   console.log('async1 end')
+// }
+function async1() {
+  debugger
+  const implicit_promise = new Promise((resolve) => {
+    debugger //2
+    Promise.resolve(async2()).then((value) => {
+      debugger
+      console.log('async1 end')
+    })
+    // new Promise((resolve) => {
+    //   debugger //3
+    //   resolve(async2())
+    // }).then((value) => {
+    //   debugger
+    //   console.log('async1 end')
+    // })
   })
+  return implicit_promise
 }
-
-async function show() {
-  for (const user of ['王妙歌', 'miaokasann']) {
-    await sleep()
-    console.log(user)
-  }
+async function async2() {
+  debugger
+  //1
+  console.log('async2 end')
 }
+async1()
 
-show()
+setTimeout(function () {
+  debugger
+  console.log('setTimeout')
+}, 0)
+
+new Promise((resolve) => {
+  debugger
+  console.log('Promise')
+  resolve()
+})
+  .then(function () {
+    debugger
+    console.log('promise1')
+  })
+  .then(function () {
+    debugger
+    console.log('promise2')
+  })
+
+console.log('script end')
+
+// async function hd() {
+//   console.log('12345678')
+// }
+// console.log(hd())
+
+// function bb() {
+//   let a = new Promise((resolve) => {
+//     console.log('async2 end')
+//     resolve()
+//   }).then((value) => {
+//     debugger
+//     console.log(value)
+//   })
+//   return a
+// }
+
+// console.log(bb())
+
+//script start => async2 end => Promise => script end => promise1 => promise2 => async1 end => setTimeout
+// script start
+// index.js:1834 1111
+// index.js:1840 async2 end
+// index.js:1849 Promise
+// index.js:1859 script end
+// index.js:1837 async1 end
+// index.js:1853 promise1
+// index.js:1856 promise2
+// index.js:1845 setTimeout
+
+// const p = Promise.resolve()
+
+// ;(async () => {
+//   await p
+//   console.log('after:await')
+// })()
+
+// p.then(() => {
+//   console.log('tick:a')
+// }).then(() => {
+//   console.log('tick:b')
+// })
+
+// const p = Promise.resolve()
+// const promise = new Promise((res) => res(p))
+// console.log(promise)
+
+// const p = Promise.resolve()
+
+// ;(() => {
+//   const implicit_promise = new Promise((resolve) => {
+//     // const promise = new Promise((res) => res(p))
+//     const promise = Promise.resolve(p)
+//     promise.then(() => {
+//       console.log('after:await')
+//       resolve()
+//     })
+//   })
+
+//   return implicit_promise
+// })()
+
+// p.then(() => {
+//   console.log('tick:a')
+// }).then(() => {
+//   console.log('tick:b')
+// })

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1 id="hdcms">houdunren.com</h1>
+    <script>
+      // // document节点 noteType为9
+      // console.log(document.nodeType)
+      // // 第一个子节点为<!DOCTYPE html>，且nodetype为10
+      // console.log(document.childNodes.item(0).nodeType)
+
+      // // body 是标签节点 nodeType为1
+      // console.log(document.body.nodeType)
+
+      // console.log(document.body.attributes)
+      // // body的属性节点nodeType 为2
+      // console.log(document.body.attributes[0].nodeType)
+
+      // // body的第一个节点为文本节点，nodeType为3
+      // console.log(document.body.childNodes)
+
+      // console.log(document.body.childNodes.item(0).nodeType)
+
+      // // body的第二个节点为注释，nodeType类型为8
+      // console.log(document.body.childNodes[1].nodeType)
+      function prototype(el) {
+        console.log(el.__proto__)
+        el.__proto__ ? prototype(el.__proto__) : ''
+      }
+      const node = document.getElementById('hdcms')
+      console.dir(node)
+      prototype(node)
+    </script>
+  </body>
+</html>
