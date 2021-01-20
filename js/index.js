@@ -1838,57 +1838,57 @@ promise任务队列
 // async1 end
 // setTimeout
 
-console.log('script start')
+// console.log('script start')
 
-// async function async1() {
-//   await async2()
-//   console.log('async1 end')
+// // async function async1() {
+// //   await async2()
+// //   console.log('async1 end')
+// // }
+// function async1() {
+//   debugger
+//   const implicit_promise = new Promise((resolve) => {
+//     debugger //2
+//     Promise.resolve(async2()).then((value) => {
+//       debugger
+//       console.log('async1 end')
+//     })
+//     // new Promise((resolve) => {
+//     //   debugger //3
+//     //   resolve(async2())
+//     // }).then((value) => {
+//     //   debugger
+//     //   console.log('async1 end')
+//     // })
+//   })
+//   return implicit_promise
 // }
-function async1() {
-  debugger
-  const implicit_promise = new Promise((resolve) => {
-    debugger //2
-    Promise.resolve(async2()).then((value) => {
-      debugger
-      console.log('async1 end')
-    })
-    // new Promise((resolve) => {
-    //   debugger //3
-    //   resolve(async2())
-    // }).then((value) => {
-    //   debugger
-    //   console.log('async1 end')
-    // })
-  })
-  return implicit_promise
-}
-async function async2() {
-  debugger
-  //1
-  console.log('async2 end')
-}
-async1()
+// async function async2() {
+//   debugger
+//   //1
+//   console.log('async2 end')
+// }
+// async1()
 
-setTimeout(function () {
-  debugger
-  console.log('setTimeout')
-}, 0)
+// setTimeout(function () {
+//   debugger
+//   console.log('setTimeout')
+// }, 0)
 
-new Promise((resolve) => {
-  debugger
-  console.log('Promise')
-  resolve()
-})
-  .then(function () {
-    debugger
-    console.log('promise1')
-  })
-  .then(function () {
-    debugger
-    console.log('promise2')
-  })
+// new Promise((resolve) => {
+//   debugger
+//   console.log('Promise')
+//   resolve()
+// })
+//   .then(function () {
+//     debugger
+//     console.log('promise1')
+//   })
+//   .then(function () {
+//     debugger
+//     console.log('promise2')
+//   })
 
-console.log('script end')
+// console.log('script end')
 
 // async function hd() {
 //   console.log('12345678')
@@ -1956,3 +1956,14 @@ console.log('script end')
 // }).then(() => {
 //   console.log('tick:b')
 // })
+
+let Lesson = {
+  site: '后盾人',
+  lists: ['js', 'css', 'mysql'],
+  show() {
+    return this.lists.map(function (title) {
+      return `${this.site}-${title}`
+    }, this)
+  },
+}
+console.log(Lesson.show())
