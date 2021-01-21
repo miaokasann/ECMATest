@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ajax请求</title>
+    <script src="request.js"></script>
+  </head>
+  <body>
+    <form action="" id="form">
+      <input type="text" name="title" />
+      <input type="submit" />
+    </form>
+    <script>
+      const form = document.getElementById('form')
+      form.addEventListener('submit', function () {
+        //阻止默认提交行为
+        event.preventDefault()
+        console.log(this)
+
+        Request.post('http://localhost:8888/ECMATest/php/hd.php', this)
+      })
+      // function post(url, data) {
+      //   const xhr = new XMLHttpRequest()
+      //   xhr.open('POST', url)
+      //   xhr.send(data)
+      //   xhr.onload = () => {
+      //     if (xhr.status == 200) {
+      //       console.log(xhr.response)
+      //     } else {
+      //       console.log(`${xhr.status}:${xhr.statusText}`)
+      //     }
+      //   }
+      // }
+    </script>
+  </body>
+</html>
