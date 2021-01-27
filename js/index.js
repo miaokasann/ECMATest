@@ -1957,13 +1957,28 @@ promise任务队列
 //   console.log('tick:b')
 // })
 
-let Lesson = {
-  site: '后盾人',
-  lists: ['js', 'css', 'mysql'],
-  show() {
-    return this.lists.map(function (title) {
-      return `${this.site}-${title}`
-    }, this)
-  },
+// let Lesson = {
+//   site: '后盾人',
+//   lists: ['js', 'css', 'mysql'],
+//   show() {
+//     return this.lists.map(function (title) {
+//       return `${this.site}-${title}`
+//     }, this)
+//   },
+// }
+// console.log(Lesson.show())
+
+// let hd = Array.of(3)
+// console.log(hd.length)
+// console.log(hd)
+
+function hd() {
+  this.show = function () {
+    return 'show in object'
+  }
 }
-console.log(Lesson.show())
+hd.prototype.show = function () {
+  return 'show in prototype'
+}
+const obj = new hd()
+console.log(obj.show())

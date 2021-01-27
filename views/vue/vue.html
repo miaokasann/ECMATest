@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <ol>
+        <todo-item></todo-item>
+      </ol>
+    </div>
+
+    <script>
+      Vue.component('todo-item', {
+        // todo-item 组件现在接受一个
+        // "prop"，类似于一个自定义 attribute。
+        // 这个 prop 名为 todo。
+        // props: ['todo'],
+        template: '<li>gk</li>',
+      })
+      var app = new Vue({
+        el: '#app',
+        data: {
+          todo: {
+            text: '111',
+          },
+        },
+      })
+    </script>
+  </body>
+</html>
