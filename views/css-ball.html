@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: rgb(37, 38, 49);
+      }
+      .ball {
+        background: radial-gradient(at center, yellow, orange);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        animation-name: ball;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+      }
+      section {
+        width: 110px;
+        height: 25px;
+        background: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        transform: translateY(24px);
+        z-index: -1;
+        border-radius: 50%;
+        filter: blur(5px);
+        animation-name: shadow;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+      }
+      @keyframes ball {
+        to {
+          transform: translateY(-300px);
+        }
+      }
+      @keyframes shadow {
+        to {
+          background: rgba(0, 0, 0, 0.1);
+          width: 110px;
+          height: 25px;
+          filter: blur(35px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ball"></div>
+    <section></section>
+  </body>
+</html>
