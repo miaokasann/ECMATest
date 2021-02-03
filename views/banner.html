@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>css做banner</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        width: 100vw;
+        height: 100vh;
+        background-color: #34495e;
+        display: grid;
+      }
+      main {
+        width: 400px;
+        height: 200px;
+        align-self: center;
+        justify-self: center;
+        background-color: seashell;
+        overflow: hidden;
+        position: relative;
+      }
+      section {
+        width: 1200px;
+        height: 200px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        animation-name: slide;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: steps(3, end);
+      }
+      section:hover,
+      section:hover + ul:after {
+        animation-play-state: paused;
+      }
+      div {
+        overflow: hidden;
+      }
+      img {
+        width: 100%;
+      }
+      @keyframes slide {
+        to {
+          transform: translateX(-1200px);
+        }
+      }
+      @keyframes num {
+        to {
+          transform: translateX(200px);
+        }
+      }
+      ul {
+        list-style: none;
+        position: absolute;
+        display: grid;
+        grid-template: 1fr / repeat(3, 1fr);
+        width: 200px;
+        height: 30px;
+        bottom: 10px;
+        transform: translateX(50%);
+        align-items: center;
+        justify-items: center;
+      }
+      ul::after {
+        content: '';
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #e74c3c;
+        top: 0;
+        left: 18px;
+        position: absolute;
+        z-index: -1;
+        animation-name: num;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: steps(3, end);
+      }
+      li {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        /* grid-template-columns: repeat(3); */
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section>
+        <div>
+          <img src="../static/es10.png" alt="" />
+        </div>
+        <div>
+          <img src="../static/es2019.jpg" alt="" />
+        </div>
+        <div>
+          <img src="../static/koa.png" alt="" />
+        </div>
+      </section>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </main>
+  </body>
+</html>

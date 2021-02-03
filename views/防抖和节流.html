@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖和节流</title>
+  </head>
+  <body>
+    <div id="div">
+      <input type="text" />
+      <input type="submit" id="input" />
+    </div>
+
+    <script>
+      var div = document.getElementById('div')
+      var btn = document.getElementById('input')
+      // div.addEventListener('click', clickDiv, false)
+      btn.addEventListener('click', throttle(submit, 2000, true), false) //冒泡阶段捕获
+      function submit(e) {
+        console.log('btn')
+      }
+      function debounce(fn, timer, triggerNow) {
+        var t = null
+        return function (e) {
+          //验证它已经有一个定时器了就吧它清掉，没有的时候才创建
+          if (t) {
+            clearTimeout(t)
+          }
+          if (triggerNow) {
+            //firstCick变量判断没有计时器的时候就是第一次点击的时候
+            var firstClick = !t
+            //1判断他是否是第一次点击
+            if (firstClick) {
+              fn.apply(this, arguments)
+            }
+            t = setTimeout(() => {
+              t = null
+            }, timer)
+          } else {
+            t = setTimeout(() => {
+              fn.apply(this, arguments)
+            }, timer)
+          }
+        }
+      }
+      function throttle(fn, delay) {
+        var begin = 0
+        return function () {
+          var cur = new Date().getTime()
+          if (cur - begin > delay) {
+            fn.apply(this, arguments)
+            begin = cur
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
