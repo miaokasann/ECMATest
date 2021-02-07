@@ -4,9 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      /* article span:nth-child(2) {
+        color: red;
+      } */
+    </style>
   </head>
   <body>
-    <h1 id="hdcms">houdunren.com</h1>
+    <a href="https://www.houdunren.com">后盾人</a>
+    <script>
+      document.querySelector('a').addEventListener('click', () => {
+        event.preventDefault()
+        alert(event.target.innerText)
+      })
+    </script>
+    <!-- <ul>
+      <li data-action="hidden">houdunren.com</li>
+      <li data-action="color" data-color="red">hdcms.com</li>
+    </ul>
+    <script>
+      class HD {
+        constructor(el) {
+          el.addEventListener('click', (e) => {
+            debugger
+            const action = e.target.dataset.action
+            this[action](e)
+          })
+        }
+        color() {
+          console.log(event)
+          event.target.style.color = event.target.dataset.color
+        }
+        hidden() {
+          event.target.hidden = true
+        }
+      }
+      new HD(document.querySelector('ul'))
+    </script> -->
     <script>
       // // document节点 noteType为9
       // console.log(document.nodeType)
@@ -27,13 +61,13 @@
 
       // // body的第二个节点为注释，nodeType类型为8
       // console.log(document.body.childNodes[1].nodeType)
-      function prototype(el) {
-        console.log(el.__proto__)
-        el.__proto__ ? prototype(el.__proto__) : ''
-      }
-      const node = document.getElementById('hdcms')
-      console.dir(node)
-      prototype(node)
+      // function prototype(el) {
+      //   console.log(el.__proto__)
+      //   el.__proto__ ? prototype(el.__proto__) : ''
+      // }
+      // const node = document.getElementById('hdcms')
+      // console.dir(node)
+      // prototype(node)
     </script>
   </body>
 </html>
